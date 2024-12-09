@@ -13,7 +13,7 @@ pipeline {
        stage("Run test") {
             environment {
                        BASE_URL = "${params.'base.url'}"
-                       BROWSER = "${params.'browser'}"
+                       BROWSER = "${env.BRANCH_NAME}"
                    }
             steps {
                 echo 'Running Playwright tests...'
@@ -26,7 +26,7 @@ pipeline {
                    sh 'java -version'
                    sh '''
                       docker run --rm \
-                      -v /home/unixuser/ui_tests \
+                      -v $(pwd):/home/unixuser/ui_tests \
                       -w /home/unixuser/ui_tests \
                       mcr.microsoft.com/playwright/java:v1.49.0-noble \
                       mvn clean test -Dbrowser=$BROWSER -Dbase.url=$BASE_URL
