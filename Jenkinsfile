@@ -28,7 +28,7 @@ pipeline {
                       -v $(pwd):/home/unixuser/ui_tests \
                       -w /home/unixuser/ui_tests \
                       mcr.microsoft.com/playwright/java:v1.49.0-noble \
-                      mvn clean test -Dbase.url=$BASE_URL -Dbrowser=$BROWSER
+                      mvn clean test -Dbrowser=$BROWSER -Dbase.url=$BASE_URL
                       '''
                 }
             }
