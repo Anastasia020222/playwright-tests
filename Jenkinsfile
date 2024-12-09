@@ -4,6 +4,10 @@ pipeline {
         string(name: "base.url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", description: "Введите тип браузера")
         }
+        environment {
+             BASE_URL = "${params.'base.url'}"
+             BROWSER = "${env.BRANCH_NAME}"
+             }
    stages {
         stage('Checkout') {
             steps {
@@ -11,10 +15,7 @@ pipeline {
             }
         }
        stage("Run test") {
-            environment {
-                       BASE_URL = "${params.'base.url'}"
-                       BROWSER = "${env.BRANCH_NAME}"
-                   }
+
             steps {
                 echo 'Running Playwright tests...'
                 echo "урл $BASE_URL"
