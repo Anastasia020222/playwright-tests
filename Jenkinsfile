@@ -1,6 +1,5 @@
 pipeline {
-   agent {
-        docker { image 'mcr.microsoft.com/playwright/java:v1.49.0-noble' } }
+   agent any
    parameters {
         string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", description: "Введите тип браузера")
