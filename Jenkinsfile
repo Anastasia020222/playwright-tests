@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent { label 'mavem-slave' }
    parameters {
         string(name: "base.url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", description: "Введите тип браузера")
