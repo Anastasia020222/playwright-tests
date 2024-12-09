@@ -1,9 +1,13 @@
-FROM maven:3.9.0
+FROM mcr.microsoft.com/playwright/java:v1.49.0-noble
 
-RUN mkdir -p /home/unixuser/mobile_tests
+RUN mkdir -p /home/unixuser/ui_tests
 
-WORKDIR /home/unixuser/mobile_tests
+WORKDIR /home/unixuser/ui_tests
 
-COPY . /home/unixuser/mobile_tests
+COPY . /home/unixuser/ui_tests
 
-ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
