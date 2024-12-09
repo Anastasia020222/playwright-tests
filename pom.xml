@@ -15,7 +15,7 @@
         <allure.results.directory>${project.basedir}/allure-results</allure.results.directory>
         <maven.compiler.plugin.version>3.9.0</maven.compiler.plugin.version>
 
-        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+        <surefire.plugin.version>3.2.5</surefire.plugin.version>
         <junit>5.10.2</junit>
         <playwright>1.48.0</playwright>
         <lombok>1.18.30</lombok>
