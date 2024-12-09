@@ -20,7 +20,8 @@ pipeline {
                 echo "урл $BASE_URL"
                 echo "браузер $BROWSER"
                 script {
-                   sh 'docker --version'
+                sh 'pwd'
+                   sh 'docker -v'
                    sh '''
                       docker run --rm \
                       -v $(pwd):/home/unixuser/ui_tests \
