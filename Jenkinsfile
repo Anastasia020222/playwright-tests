@@ -21,11 +21,12 @@ pipeline {
                 echo "браузер $BROWSER"
                 script {
                 sh 'pwd'
+                  sh
                    sh 'docker -v'
                    sh 'java -version'
                    sh '''
                       docker run --rm \
-                      -v $(pwd):/home/unixuser/ui_tests \
+                      -v /home/unixuser/ui_tests \
                       -w /home/unixuser/ui_tests \
                       mcr.microsoft.com/playwright/java:v1.49.0-noble \
                       mvn clean test -Dbrowser=$BROWSER -Dbase.url=$BASE_URL
