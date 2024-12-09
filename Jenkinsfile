@@ -15,6 +15,8 @@ pipeline {
                        BASE_URL = "${params.'base.url'}"
                        BROWSER = "${params.browser}"
                    }
+                   echo "урл $BASE_URL"
+                   echo "браузер $BROWSER"
             steps {
                 echo 'Running Playwright tests...'
                 script {
