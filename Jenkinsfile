@@ -13,7 +13,7 @@ pipeline {
        stage("Run test") {
             environment {
                        BASE_URL = "${params.'base.url'}"
-                       BROWSER = "${params.browser}"
+                       BROWSER = "${params.'browser'}"
                    }
             steps {
                 echo 'Running Playwright tests...'
