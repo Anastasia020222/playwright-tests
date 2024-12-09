@@ -1,8 +1,8 @@
 pipeline {
-   agent any
+   agent maven-slave
    parameters {
         string(name: "base.url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
-        string(name: "browser.type", defaultValue: "chrome", description: "Введите тип браузера")
+        string(name: "browser", defaultValue: "chrome", description: "Введите тип браузера")
         }
    stages {
         stage('Checkout') {
@@ -13,7 +13,7 @@ pipeline {
        stage("Run test") {
             environment {
                        BASE_URL = "${params.'base.url'}"
-                       BROWSER = "${params.'browser.type'}"
+                       BROWSER = "${params.'browser'}"
                    }
             steps {
                 echo 'Running Playwright tests...'
@@ -28,7 +28,7 @@ pipeline {
                       -v $(pwd):/home/unixuser/ui_tests \
                       -w /home/unixuser/ui_tests \
                       mcr.microsoft.com/playwright/java:v1.49.0-noble \
-                      mvn clean test -Dbrowser.type=$BROWSER -Dbase.url=$BASE_URL
+                      mvn clean test -Dbrowser=$BROWSER -Dbase.url=$BASE_URL
                       '''
                 }
             }
