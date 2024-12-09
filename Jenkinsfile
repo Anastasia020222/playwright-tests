@@ -15,10 +15,10 @@ pipeline {
                        BASE_URL = "${params.'base.url'}"
                        BROWSER = "${params.browser}"
                    }
-                   echo "урл $BASE_URL"
-                   echo "браузер $BROWSER"
             steps {
                 echo 'Running Playwright tests...'
+                echo "урл $BASE_URL"
+                echo "браузер $BROWSER"
                 script {
                    sh '''
                       docker run --rm \
