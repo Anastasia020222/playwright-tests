@@ -6,7 +6,7 @@ pipeline {
         }
         environment {
              BASE_URL = "${params.'base.url'}"
-             BROWSER = "${env.BRANCH_NAME}"
+             BROWSER = "${params.'browser'}"
              }
    stages {
         stage('Checkout') {
@@ -30,7 +30,7 @@ pipeline {
                       -v $(pwd):/home/unixuser/ui_tests \
                       -w /home/unixuser/ui_tests \
                       mcr.microsoft.com/playwright/java:v1.49.0-noble \
-                      mvn clean test -Dbrowser=$BROWSER -Dbase.url=$BASE_URL
+                      mvn clean test -Dbrowser=env.BROWSER -Dbase.url=$BASE_URL
                       '''
                 }
             }
