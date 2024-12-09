@@ -13,6 +13,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.results.directory>${project.basedir}/allure-results</allure.results.directory>
+        <maven.compiler.plugin.version>3.9.0</maven.compiler.plugin.version>
 
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <junit>5.10.2</junit>
@@ -109,6 +110,16 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
