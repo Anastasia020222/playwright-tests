@@ -6,7 +6,7 @@ pipeline {
         }
         environment {
              BASE_URL = "${params.'base.url'}"
-             BROWSER = "${params.'browser'}"
+             BROWSER = "${params.browser}"
              }
    stages {
         stage('Checkout') {
@@ -17,18 +17,16 @@ pipeline {
        stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
-                echo "урл $BASE_URL"
-                echo "браузер $BROWSER"
-                sh 'pwd'
-
                 sh '''
                 docker build -t playwright-tests .
                 '''
                 sh 'ls /home/jenkins/workspace/web-tests'
                 sh '''
+                   echo "browser: $BROWSER"
+                   echo "url: $BASE_URL"
                    docker run --rm \
-                   -e BASE_URL=$BASE_URL \
-                   -e BROWSER=$BROWSER \
+                   -e BASE_URL=${BASE_URL} \
+                   -e BROWSER=${BROWSER} \
                    playwright-tests
                    '''
 
