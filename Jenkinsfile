@@ -27,8 +27,7 @@ pipeline {
             sh("ls -l /home/jenkins/workspace/web-tests")
             sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
             sh("cp -r /home/jenkins/allure-results ./allure-results")
-            //sh("docker run -v web-allure:/home/jenkins/workspace/web_tests/allure-results")
-            sh 'ls'
+            sh("ls /home/jenkins/allure-results")
                 script {
                     allure([
                        includeProperties: false,
