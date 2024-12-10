@@ -23,7 +23,7 @@ pipeline {
                 sh 'docker -v'
                 sh 'java -version'
                 sh '''
-                docker build -t playwright-tests .
+                sudo docker build -t playwright-tests .
                 '''
                 sh '''
                    docker run --rm \
