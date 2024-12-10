@@ -36,6 +36,8 @@ pipeline {
                        results: [[path: './allure-results']]
                     ])
                 }
+                sh("whoami")
+                sh("ls -ld /home/jenkins/allure-results")
                 sh("rm -rf /home/jenkins/allure-results/*")
             }
         }
