@@ -10,14 +10,6 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Build images playwright") {
-            steps {
-            script {
-                def images = sh 'docker images -qf reference=playwright-tests'
-                echo "images $images"
-                }
-            }
-        }
         stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
@@ -25,5 +17,18 @@ pipeline {
                 sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
        }
+       stage("Allure report") {
+            steps {
+                script {
+                    allure([
+                       includeProperties: false,
+                       jdk: '',
+                       properties: [],
+                       reportBuildPolicy: 'ALWAYS',
+                       results: [[path: './allure-results']]
+                    ])
+                }
+            }
+        }
    }
 }
