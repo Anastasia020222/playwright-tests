@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo 'Running Playwright tests...'
                 sh 'pwd'
-                sh("rm -rf /web-allure/*")
+                //sh("rm -rf /web-allure/*")
                 sh 'ls'
                 sh 'docker build -t playwright-tests .'
                 sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/jenkins/workspace/web_tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
@@ -22,8 +22,8 @@ pipeline {
        }
        stage("Allure report") {
             steps {
-            sh("mkdir ./allure-results")
-            sh("cp /web-allure/* ./allure-results/")
+            sh("ls -l /home/jenkins/workspace/web_tests/")
+            //sh("docker run -v web-allure:/home/jenkins/workspace/web_tests/allure-results")
             sh 'pwd'
             sh 'ls'
                 script {
