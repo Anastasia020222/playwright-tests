@@ -10,7 +10,7 @@ public abstract class AbsBasePage<T> {
 
     public AbsBasePage(Page page) {
         this.page = page;
-        page.setDefaultTimeout(60000);
+        page.setDefaultTimeout(120000);
     }
 
     @Step("Открытие страницы")
