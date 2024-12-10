@@ -31,8 +31,7 @@ pipeline {
                    -e BROWSER=$BROWSER \
                    playwright-tests
                    '''
-                   sh 'pwd'
-                   sh 'ls'
+
             }
        }
    }
