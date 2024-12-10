@@ -5,7 +5,7 @@ pipeline {
         string(name: 'BROWSER', defaultValue: 'chrome', trim: true, description: 'Введите тип браузера')
         }
         environment {
-             def BASE_URL = "${params.base.url}"
+             def BASE_URL = "${params.'base.url'}"
              def browser = "${params.BROWSER}"
              }
    stages {
