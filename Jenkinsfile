@@ -30,7 +30,6 @@ pipeline {
                    docker run --rm \
                    -e BASE_URL=$BASE_URL \
                    -e BROWSER=$BROWSER \
-                   -v $(pwd):/home/unixuser/ui_tests \
                    playwright-tests
                    '''
             }
