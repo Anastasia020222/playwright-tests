@@ -25,7 +25,6 @@ pipeline {
                 docker build -t playwright-tests .
                 '''
                 sh 'ls /home/jenkins/workspace/web-tests'
-                sh 'ls /home/unixuser/ui_tests'
                 sh '''
                    docker run --rm \
                    -e BASE_URL=$BASE_URL \
