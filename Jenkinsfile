@@ -23,6 +23,8 @@ pipeline {
                 sh 'docker -v'
                 sh 'java -version'
                 sh 'whoami'
+                sh 'ls -l /var/run/docker.sock'
+
                 sh 'id'
                 sh '''
                 docker build -t playwright-tests .
