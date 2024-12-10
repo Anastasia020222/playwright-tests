@@ -27,7 +27,7 @@
 
         <browser>chrome</browser>
         <versionBrowser>130.0</versionBrowser>
-        <base.url>https://demoqa.com</base.url>
+        <url>https://demoqa.com</url>
 
     </properties>
 
@@ -96,7 +96,7 @@
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
                         <versionBrowser>${versionBrowser}</versionBrowser>
-                        <base.url>${base.url}</base.url>
+                        <url>${url}</url>
                     </systemPropertyVariables>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

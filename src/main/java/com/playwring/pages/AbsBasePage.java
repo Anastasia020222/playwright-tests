@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 public abstract class AbsBasePage<T> {
 
     protected Page page;
-    private String url = System.getProperty("base.url");
+    private String url = System.getProperty("url");
 
     public AbsBasePage(Page page) {
         this.page = page;
