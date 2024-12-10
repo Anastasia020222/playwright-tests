@@ -19,6 +19,8 @@ pipeline {
        }
        stage("Allure report") {
             steps {
+            sh 'pwd'
+            sh 'ls'
                 script {
                     allure([
                        includeProperties: false,
