@@ -22,22 +22,22 @@ pipeline {
        stage("Allure report") {
             steps {
             sh 'pwd'
-            sh("mkdir ./allure-results")
-            sh("ls -l /home/jenkins/workspace/web-tests")
-            sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
-            sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
-            sh("ls /home/jenkins/allure-results")
+//             sh("mkdir ./allure-results")
+//             sh("ls -l /home/jenkins/workspace/web-tests")
+//             sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+//             sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
+            sh("ls -al /home/jenkins/allure-results")
                 script {
                     allure([
                        includeProperties: false,
                        jdk: '',
                        properties: [],
                        reportBuildPolicy: 'ALWAYS',
-                       results: [[path: './allure-results']]
+                       results: [[path: '/home/jenkins/allure-results']]
                     ])
                 }
                 sh("whoami")
-                sh("ls -ld /home/jenkins/allure-results")
+                sh("ls -la /home/jenkins/allure-results")
                 sh("rm -rf /home/jenkins/allure-results/*")
             }
         }
