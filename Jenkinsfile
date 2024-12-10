@@ -10,13 +10,17 @@ pipeline {
                 checkout scm
             }
         }
-       stage("Run test") {
+        stage("Build images playwright") {
+            steps {
+                def imagesId = sh 'docker images -qf reference=playwright-tests'
+                echo '$imagesId'
+            }
+        }
+        stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
                 sh 'docker build -t playwright-tests .'
-                sh 'ls /home/jenkins/workspace/web-tests'
                 sh '''docker run --rm -e URL=$url -e BROWSER=$browser playwright-tests'''
-
             }
        }
    }
