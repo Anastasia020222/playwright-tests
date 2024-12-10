@@ -27,7 +27,6 @@ pipeline {
                 sh 'ls /home/jenkins/workspace/web-tests'
                 sh '''
                    docker run --rm \
-                   -v $(pwd):/home/jenkins/workspace/web-tests \
                    -e BASE_URL=$BASE_URL \
                    -e BROWSER=$BROWSER \
                    playwright-tests
