@@ -12,8 +12,7 @@ pipeline {
         }
        stage("Run test") {
             steps {
-            echo "browser: $BROWSER"
-            echo "url: $BASE_URL"
+
             script {
                 echo 'Running Playwright tests...'
                 sh 'docker build -t playwright-tests .'
