@@ -2,11 +2,11 @@ pipeline {
    agent { label 'maven-slave' }
    parameters {
         string(name: 'base.url', defaultValue: 'https://demoqa.com', trim: true, description: 'Введите урл для запуска тестов')
-        string(name: 'browser', defaultValue: 'chrome', description: 'Введите тип браузера')
+        string(name: 'browser', defaultValue: 'chrome', trim: true, description: 'Введите тип браузера')
         }
         environment {
              BASE_URL = "${params.'base.url'}"
-             BROWSER = "${params.browser}"
+             BROWSER = "${params.'browser'}"
              }
    stages {
         stage('Checkout') {
