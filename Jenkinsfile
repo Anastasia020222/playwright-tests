@@ -23,7 +23,7 @@ pipeline {
        stage("Allure report") {
             steps {
             sh("mkdir ./allure-results")
-            sh("cp ./web-allure/* ./allure-results/")
+            //sh("cp /root/web-allure/* ./allure-results/")
             sh 'pwd'
             sh 'ls'
                 script {
