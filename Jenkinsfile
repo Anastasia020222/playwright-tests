@@ -13,17 +13,17 @@ pipeline {
         stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
-                sh("rm -rf ./web-allure/*")
+                sh("rm -rf /root/web-allure/*")
                 sh 'pwd'
                 sh 'ls'
                 sh 'docker build -t playwright-tests .'
-                sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/unixuser/web_tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
+                sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/jenkins/workspace/web_tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
        }
        stage("Allure report") {
             steps {
             sh("mkdir ./allure-results")
-            //sh("cp /root/web-allure/* ./allure-results/")
+            sh("cp /root/web-allure/* ./allure-results/")
             sh 'pwd'
             sh 'ls'
                 script {
