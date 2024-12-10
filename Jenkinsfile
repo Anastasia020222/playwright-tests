@@ -13,7 +13,7 @@ pipeline {
         stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
-                sh("rm -rf /root/web-allure/*")
+                sh("rm -rf /web-allure/*")
                 sh 'pwd'
                 sh 'ls'
                 sh 'docker build -t playwright-tests .'
@@ -23,7 +23,7 @@ pipeline {
        stage("Allure report") {
             steps {
             sh("mkdir ./allure-results")
-            sh("cp /root/web-allure/* ./allure-results/")
+            sh("cp /web-allure/* ./allure-results/")
             sh 'pwd'
             sh 'ls'
                 script {
