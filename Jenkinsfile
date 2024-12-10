@@ -15,7 +15,7 @@ pipeline {
                 echo 'Running Playwright tests...'
                 sh 'docker build -t playwright-tests .'
                 sh 'ls /home/jenkins/workspace/web-tests'
-                sh '''docker run --rm -e BASE_URL=$url -e BROWSER=$browser playwright-tests'''
+                sh '''docker run --rm -e URL=$url -e BROWSER=$browser playwright-tests'''
 
             }
        }
