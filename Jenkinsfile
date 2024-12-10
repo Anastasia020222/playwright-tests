@@ -23,11 +23,14 @@ pipeline {
                 sh 'docker -v'
                 sh 'java -version'
                 sh '''
+                docker build -t playwright-tests .
+                '''
+                sh '''
                    docker run --rm \
+                   -e BASE_URL=$BASE_URL \
+                   -e BROWSER=$BROWSER \
                    -v $(pwd):/home/unixuser/ui_tests \
-                   -w /home/unixuser/ui_tests \
-                   mcr.microsoft.com/playwright/java:v1.49.0-noble \
-                   mvn clean test -Dbrowser=env.BROWSER -Dbase.url=$BASE_URL
+                   playwright-tests
                    '''
             }
        }
