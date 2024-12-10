@@ -23,8 +23,6 @@ pipeline {
                 script {
                 sh 'pwd'
                   sh
-                   sh 'docker -v'
-                   sh 'java -version'
                    sh '''
                       docker run --rm \
                       -v $(pwd):/home/unixuser/ui_tests \
