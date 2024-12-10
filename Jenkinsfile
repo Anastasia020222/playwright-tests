@@ -22,7 +22,9 @@ pipeline {
        }
        stage("Allure report") {
             steps {
+            sh("mkdir ./allure-results")
             sh("ls -l /home/jenkins/workspace/web_tests/")
+            sh("cp web-allure ./allure-results")
             //sh("docker run -v web-allure:/home/jenkins/workspace/web_tests/allure-results")
             sh 'pwd'
             sh 'ls'
