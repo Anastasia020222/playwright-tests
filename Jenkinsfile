@@ -17,18 +17,18 @@ pipeline {
        stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
-                sh '
+                sh "
                 docker build -t playwright-tests .
-                '
+                "
                 sh 'ls /home/jenkins/workspace/web-tests'
-                sh '
+                sh "
                    echo "browser: $BROWSER"
                    echo "url: $BASE_URL"
                    docker run --rm \
                    -e BASE_URL=${BASE_URL} \
                    -e BROWSER=${BROWSER} \
                    playwright-tests
-                   '
+                   "
 
             }
        }
