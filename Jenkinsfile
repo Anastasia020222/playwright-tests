@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'Running Playwright tests...'
                 sh 'docker build -t playwright-tests .'
-                sh '''docker run --rm -e URL=$url -e BROWSER=$browser playwright-tests'''
+                sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
        }
    }
