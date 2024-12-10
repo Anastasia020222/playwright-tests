@@ -12,8 +12,10 @@ pipeline {
         }
         stage("Build images playwright") {
             steps {
-                IMAGES_Id = sh 'docker images -qf reference=playwright-tests'
+            script {
+                def images = sh 'docker images -qf reference=playwright-tests'
                 echo '$IMAGES_Id'
+                }
             }
         }
         stage("Run test") {
