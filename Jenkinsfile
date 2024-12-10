@@ -22,6 +22,8 @@ pipeline {
                 sh 'pwd'
                 sh 'docker -v'
                 sh 'java -version'
+                sh 'whoami'
+                sh 'id'
                 sh '''
                 docker build -t playwright-tests .
                 '''
