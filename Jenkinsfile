@@ -12,7 +12,7 @@ pipeline {
         }
         stage("Build images playwright") {
             steps {
-                def imagesId = sh 'docker images -qf reference=playwright-tests'
+                imagesId = sh 'docker images -qf reference=playwright-tests'
                 echo '$imagesId'
             }
         }
