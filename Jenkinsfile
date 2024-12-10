@@ -20,12 +20,8 @@ pipeline {
                 echo "урл $BASE_URL"
                 echo "браузер $BROWSER"
                 sh 'pwd'
-                sh 'docker -v'
-                sh 'java -version'
-                sh 'whoami'
-                sh 'ls -l /var/run/docker.sock'
-                sh 'docker ps'
-                sh 'id'
+                sh 'ls /home/jenkins/workspace/web-tests'
+                sh 'ls /home/unixuser/ui_tests'
                 sh '''
                 docker build -t playwright-tests .
                 '''
