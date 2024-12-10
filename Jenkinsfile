@@ -25,8 +25,8 @@ pipeline {
             sh 'pwd'
             sh("mkdir ./allure-results")
             sh("ls -l /home/jenkins/workspace/web-tests")
-            sh("cp /home/jenkins/allure-results ./allure-results")
             sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
+            sh("cp -r /home/jenkins/allure-results ./allure-results")
             //sh("docker run -v web-allure:/home/jenkins/workspace/web_tests/allure-results")
             sh 'ls'
                 script {
