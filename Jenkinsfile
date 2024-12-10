@@ -14,7 +14,7 @@ pipeline {
             steps {
             script {
                 def images = sh 'docker images -qf reference=playwright-tests'
-                echo '$images'
+                echo "$images"
                 }
             }
         }
