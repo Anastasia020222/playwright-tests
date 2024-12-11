@@ -41,7 +41,7 @@ pipeline {
                 }
                 sh("whoami")
                 sh("ls -la /home/jenkins/allure-results")
-                sh("rm -rf /home/jenkins/workspace/web-tests/allure-results/")
+                sh("rm -rf /home/jenkins/allure-results/")
             }
         }
    }
