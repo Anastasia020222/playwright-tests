@@ -19,7 +19,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls'
                 sh 'docker build -t playwright-tests .'
-                sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/jenkins/workspace/web-tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
+                sh '''docker run --rm --user 1000:989 -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/jenkins/workspace/web-tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
        }
        stage("Allure report") {
