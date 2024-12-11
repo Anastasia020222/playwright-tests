@@ -5,7 +5,8 @@ RUN groupadd -g 1002 jenkins && \
 
 USER jenkins
 
-RUN mkdir -p /home/jenkins/workspace/web-tests
+RUN mkdir -p /home/jenkins/workspace/web-tests && \
+    chown -R jenkins:jenkins /home/jenkins
 
 WORKDIR /home/jenkins/workspace/web-tests
 
