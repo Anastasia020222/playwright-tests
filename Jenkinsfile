@@ -17,42 +17,32 @@ pipeline {
         }
         stage("Running Playwright tests") {
             steps {
-                script {
-                    sh '''
-                        docker run --rm \
-                        -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
-                        -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
-                        -e URL=$url -e BROWSER=$browser \
-                        playwright-tests
-                    '''
-                }
+                sh '''
+                    docker run --rm \
+                    -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
+                    -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
+                    -e URL=$url -e BROWSER=$browser \
+                    playwright-tests
+                '''
             }
         }
     }
     post {
         always {
-        stages {
-            stage("Publish Allure Report") {
-                steps {
-                    script {
-                        sh("mkdir -p ./allure-results")
-                        sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
-                        allure([
-                            includeProperties: false,
-                            jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: './allure-results']]
-                        ])
-                    }
-                }
+            // Публикация отчёта Allure
+            script {
+                sh("mkdir -p ./allure-results")
+                sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: './allure-results']]
+                ])
             }
-            stage("Cleanup Resources") {
-                steps {
-                    sh("rm -rf /home/jenkins/allure-results/*")
-                }
-            }
-            }
+            // Очистка ресурсов
+            sh("rm -rf /home/jenkins/allure-results/*")
         }
     }
 }
