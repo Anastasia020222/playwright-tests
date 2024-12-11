@@ -31,6 +31,7 @@ pipeline {
     }
     post {
         always {
+        stages {
             stage("Publish Allure Report") {
                 steps {
                     script {
@@ -50,6 +51,7 @@ pipeline {
                 steps {
                     sh("rm -rf /home/jenkins/allure-results/*")
                 }
+            }
             }
         }
     }
