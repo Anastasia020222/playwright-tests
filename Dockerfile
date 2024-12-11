@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/playwright/java:v1.49.0-noble
 
-RUN groupadd -g 1001 jenkins && \
-    useradd -m -u 1001 -g 1001 -s /bin/bash jenkins
+RUN groupadd -g 1002 jenkins && \
+    useradd -m -u 1002 -g 1002 -s /bin/bash jenkins
 
 USER jenkins
 
