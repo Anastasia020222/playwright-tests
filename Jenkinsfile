@@ -16,7 +16,7 @@ pipeline {
         stage("Run test") {
             steps {
                 echo 'Running Playwright tests...'
-                sh("docker volume rm web-allure")
+                sh("rm -rf /web-allure/*")
                 sh 'docker build -t playwright-tests .'
                 sh '''docker run --rm -v /home/unixuser/.m2/repository:/root/.m2/repository -v web-allure:/home/jenkins/workspace/web-tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
