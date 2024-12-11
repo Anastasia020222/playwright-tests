@@ -4,6 +4,6 @@ RUN mkdir -p /home/jenkins/workspace/web-tests
 
 WORKDIR /home/jenkins/workspace/web-tests
 
-COPY . /home/jenkins/workspace/web-tests
+COPY --chown=jenkins:jenkins . /home/jenkins/workspace/web-tests
 
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
