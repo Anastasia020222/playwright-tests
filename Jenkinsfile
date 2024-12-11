@@ -20,13 +20,15 @@ pipeline {
                 sh '''docker run --rm -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository -v web-allure:/home/jenkins/workspace/web-tests/allure-results -e URL=$url -e BROWSER=$browser playwright-tests'''
             }
        }
-       stage("Allure report") {
-            steps {
+       //stage("Allure report") {
+            //steps {
+       post {
+            always {
             sh 'pwd'
             sh("whoami")
-            sh("mkdir ./allure-results")
+            //sh("mkdir ./allure-results")
 //             sh("ls -l /home/jenkins/workspace/web-tests")
-             sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+             //sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
 //             sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
             sh("ls -al /home/jenkins/allure-results")
                 script {
