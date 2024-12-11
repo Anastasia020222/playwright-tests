@@ -25,6 +25,7 @@ pipeline {
        stage("Allure report") {
             steps {
             sh 'pwd'
+            sh("whoami")
 //             sh("mkdir ./allure-results")
 //             sh("ls -l /home/jenkins/workspace/web-tests")
 //             sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
