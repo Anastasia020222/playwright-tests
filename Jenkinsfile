@@ -7,12 +7,12 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-                echo "build-user $BUILD_USER"
                 checkout scm
             }
         }
         stage("Build images playwright-tests") {
             steps {
+                echo "build-user $BUILD_USER"
                 sh 'docker build -t playwright-tests .'
             }
         }
