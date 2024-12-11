@@ -1,13 +1,9 @@
-FROM mcr.microsoft.com/playwright/java:v1.49.0-noble
+FROM playwright/java:v1.49.0-noble
 
-RUN mkdir -p /home/unixuser/ui_tests
+RUN mkdir -p /home/jenkins/workspace/web-tests/allure-results
 
-WORKDIR /home/unixuser/ui_tests
+WORKDIR /home/jenkins/workspace/web-tests
 
-COPY . /home/unixuser/ui_tests
+COPY --chown=jenkins:jenkins . /home/jenkins/workspace/web-tests
 
-COPY entrypoint.sh /entrypoint.sh
-
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "entrypoint.sh"]

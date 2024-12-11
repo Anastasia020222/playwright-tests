@@ -1,34 +1,48 @@
 pipeline {
-   agent any
-   parameters {
-        string(name: "base.url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
-        string(name: "browser", defaultValue: "chrome", description: "Введите тип браузера")
-        }
-   stages {
-        stage('Checkout') {
+    agent { label 'maven-slave' }
+    parameters {
+        string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
+        string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
+    }
+    stages {
+        stage("Checkout") {
             steps {
                 checkout scm
             }
         }
-       stage("Run test") {
-            environment {
-                       BASE_URL = "${params.'base.url'}"
-                       BROWSER = "${params.browser}"
-                   }
+        stage("Build images playwright-tests") {
             steps {
-                echo 'Running Playwright tests...'
-                echo "урл $BASE_URL"
-                echo "браузер $BROWSER"
-                script {
-                   sh '''
-                      docker run --rm \
-                      -v $(pwd):/home/unixuser/ui_tests \
-                      -w /home/unixuser/ui_tests \
-                      mcr.microsoft.com/playwright/java:v1.49.0-noble \
-                      mvn clean test -Dbase.url=$BASE_URL -Dbrowser=$BROWSER
-                      '''
-                }
+                sh 'docker build -t playwright-tests .'
             }
-       }
-   }
+        }
+        stage("Running Playwright tests") {
+            steps {
+                sh '''
+                    docker run --rm \
+                    -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
+                    -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
+                    -v ms-playwright:/ms-playwright \
+                    -e URL=$url -e BROWSER=$browser \
+                    playwright-tests
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                echo "Publication of the report"
+                sh("mkdir -p ./allure-results")
+                sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: './allure-results']]
+                ])
+            }
+            sh("rm -rf /home/jenkins/allure-results/*")
+        }
+    }
 }

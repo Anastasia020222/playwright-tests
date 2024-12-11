@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn clean test -Dbase.url=$BASE_URL -Dbrowser=$BROWSER
+DEBUG=pw:* mvn clean test -Durl=$URL -Dbrowser=$BROWSER

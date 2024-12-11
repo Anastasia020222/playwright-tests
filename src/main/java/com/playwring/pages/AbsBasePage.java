@@ -6,11 +6,11 @@ import io.qameta.allure.Step;
 public abstract class AbsBasePage<T> {
 
     protected Page page;
-    private String url = System.getProperty("base.url");
+    private String url = System.getProperty("url");
 
     public AbsBasePage(Page page) {
         this.page = page;
-        page.setDefaultTimeout(60000);
+        page.setDefaultTimeout(120000);
     }
 
     @Step("Открытие страницы")

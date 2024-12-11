@@ -12,6 +12,7 @@ public class PlaywrightFactory implements IPlaywright {
     @Override
     public Browser create(Playwright playwright) {
         TypeBrowser browser = getTypeBrowser();
+        System.out.println("browser " + browser);
         switch (browser) {
             case CHROME:
                 BrowserType chromium = playwright.chromium();
