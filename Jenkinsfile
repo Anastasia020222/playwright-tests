@@ -12,7 +12,8 @@ pipeline {
         }
         stage("Build images playwright-tests") {
             steps {
-                echo "build-user $BUILD_USER"
+                BUILD_TRIGGER_BY=$(curl -k --silent ${BUILD_URL}/api/xml | tr '<' '\n' | egrep '^userId>|^userName>' | sed 's/.*>//g' | sed -e '1s/$/ \//g' | tr '\n' ' ')
+                echo "build-user ${}BUILD_TRIGGER_BY}"
                 sh 'docker build -t playwright-tests .'
             }
         }
