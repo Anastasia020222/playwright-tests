@@ -25,18 +25,18 @@ pipeline {
             steps {
             sh 'pwd'
             sh("whoami")
-            sh("mkdir ./allure-results")
+            //sh("mkdir ./allure-results")
 //             sh("ls -l /home/jenkins/workspace/web-tests")
-             sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+             //sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
 //             sh("ls -l /home/jenkins/workspace/web-tests/allure-results")
-            //sh("ls -al /home/jenkins/allure-results")
+            sh("ls -al /home/jenkins/allure-results")
                 script {
                     allure([
                        includeProperties: false,
                        jdk: '',
                        properties: [],
                        reportBuildPolicy: 'ALWAYS',
-                       results: [[path: './allure-results']]
+                       results: [[path: '/home/jenkins/allure-results']]
                     ])
                 }
                 sh("whoami")
