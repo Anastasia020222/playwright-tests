@@ -14,8 +14,8 @@ RUN chown -R jenkins:jenkins /home/jenkins/workspace/web-tests
 RUN chmod -R 775 /home/jenkins/workspace/web-tests
 
 # Меняем владельца и даем права на кеш Maven
-RUN chown -R jenkins:jenkins /home/jenkins/.m2
-RUN chmod -R 775 /home/jenkins/.m2
+RUN chown -R jenkins:jenkins /home/unixuser/.m2/repository
+RUN chmod -R 775 /home/unixuser/.m2/repository
 
 # Меняем владельца для Allure-результатов
 RUN chown -R jenkins:jenkins /home/jenkins/workspace/web-tests/allure-results
