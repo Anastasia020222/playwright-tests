@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright/java:v1.49.0-noble
+FROM playwright/java:v1.49.0-noble
 
 RUN mkdir -p /home/jenkins/workspace/web-tests
 
