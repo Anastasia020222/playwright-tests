@@ -17,8 +17,8 @@ pipeline {
             }
         }
         stage("Running Playwright tests") {
-        echo "logs $LOGS"
             steps {
+            echo "logs $LOGS"
                 sh '''
                     docker run --rm \
                     -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
