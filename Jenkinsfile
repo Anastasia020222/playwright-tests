@@ -11,7 +11,9 @@ pipeline {
             }
         }
         stage("Build images playwright-tests") {
-            sh 'docker build -t playwright-tests .'
+            steps {
+                sh 'docker build -t playwright-tests .'
+            }
         }
         try {
             stage("Running Playwright tests") {
