@@ -6,6 +6,4 @@ WORKDIR /home/jenkins/workspace/web-tests
 
 COPY . /home/jenkins/workspace/web-tests
 
-
-
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
