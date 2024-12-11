@@ -4,9 +4,9 @@ pipeline {
         string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
         }
-        environment {
-                DEBUG = 'pw:*'
-            }
+   options {
+        ansiColor('xterm')
+   }
    stages {
         stage('Checkout') {
             steps {
