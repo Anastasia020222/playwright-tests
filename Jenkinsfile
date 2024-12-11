@@ -37,14 +37,14 @@ pipeline {
                        reportBuildPolicy: 'ALWAYS',
                        results: [[path: '/home/jenkins/allure-results']]
                     ])
-                }
+                    }
             }
-            stage("Delete resources") {
-                steps {
-                    sh("whoami")
-                    sh("ls -la /home/jenkins/allure-results")
-                    sh("rm -rf /home/jenkins/allure-results/")
-                 }
+        }
+        stage("Delete resources") {
+            steps {
+               sh("whoami")
+               sh("ls -la /home/jenkins/allure-results")
+               sh("rm -rf /home/jenkins/allure-results/")
             }
         }
    }
