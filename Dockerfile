@@ -1,6 +1,6 @@
 FROM playwright/java:v1.49.0-noble
 
-RUN mkdir -p /home/jenkins/workspace/web-tests
+RUN mkdir -p /home/jenkins/workspace/web-tests/allure-results
 
 WORKDIR /home/jenkins/workspace/web-tests
 
