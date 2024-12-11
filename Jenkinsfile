@@ -3,6 +3,7 @@ pipeline {
     parameters {
         string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
+        string(name: "logs", defaultValue: "browser", description: "Логирование playwright: * , browser, api, network, page, proxy и тп.")
     }
     stages {
         stage("Checkout") {

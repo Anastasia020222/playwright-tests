@@ -1,3 +1,3 @@
 #!/bin/bash
 
-DEBUG=pw:* mvn clean test -Durl=$URL -Dbrowser=$BROWSER
+DEBUG=pw:page mvn clean test -Durl=$URL -Dbrowser=$BROWSER
