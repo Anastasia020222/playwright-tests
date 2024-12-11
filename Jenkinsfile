@@ -54,7 +54,6 @@ pipeline {
                     results: [[path: './allure-results']]
                 ])
             }
-            currentBuild.result = "SUCCESS"
             sh("rm -rf /home/jenkins/allure-results/*")
         }
     }
