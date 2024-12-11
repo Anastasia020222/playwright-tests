@@ -5,6 +5,16 @@ pipeline {
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
     }
     stages {
+        stage('Display User') {
+            steps {
+                script {
+                    wrap([$class: 'BuildUser']) {
+                        echo "Build triggered by: ${env.BUILD_USER}"
+                        echo "User email: ${env.BUILD_USER_EMAIL}"
+                    }
+                }
+            }
+        }
         stage("Checkout") {
             steps {
                 checkout scm
@@ -12,8 +22,6 @@ pipeline {
         }
         stage("Build images playwright-tests") {
             steps {
-                echo "Build triggered by: ${BUILD_USER}"
-                echo "User email: ${BUILD_USER_EMAIL}"
                 sh 'docker build -t playwright-tests .'
             }
         }
