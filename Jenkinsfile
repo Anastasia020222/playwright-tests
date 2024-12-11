@@ -9,8 +9,10 @@ pipeline {
             steps {
                 script {
                     wrap([$class: 'BuildUser']) {
-                        echo "Build triggered by: ${env.BUILD_USER}"
-                        echo "User email: ${env.BUILD_USER_EMAIL}"
+                    currentBuild.description = """
+                        User: ${env.BUILD_USER}"
+                        User email: ${env.BUILD_USER_EMAIL}"
+                    """
                     }
                 }
             }
