@@ -5,6 +5,18 @@ pipeline {
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
     }
     stages {
+        stage('Display User') {
+            steps {
+                script {
+                    wrap([$class: 'BuildUser']) {
+                    currentBuild.description = """
+                        User: ${env.BUILD_USER}"
+                        User email: ${env.BUILD_USER_EMAIL}"
+                    """
+                    }
+                }
+            }
+        }
         stage("Checkout") {
             steps {
                 checkout scm
