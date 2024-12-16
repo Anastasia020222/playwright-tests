@@ -3,22 +3,17 @@ pipeline {
     parameters {
         string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
-        string(name: "gitBranch", defaultValue: "main", description: "Укажите ветку, из которой нужно взять изменения")
+        string(name: "branch", defaultValue: "main", description: "Укажите ветку, из которой нужно взять изменения")
         string(name: "threads", defaultValue: "2", description: "Количество потоков")
     }
     stages {
         stage('Display User') {
             steps {
                 script {
-                   echo "Branch parameter: ${params.gitBranch}"
-                   params.each { key, value ->
-                           echo "${key}: ${value}"
-                       }
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
                         User: ${env.BUILD_USER}
-                        User email: ${env.BUILD_USER_EMAIL}
-                        Branch: ${params.gitBranch}
+                        Branch: ${params.branch}
                     """
                     }
                 }
