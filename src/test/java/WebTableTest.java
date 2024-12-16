@@ -16,4 +16,11 @@ public class WebTableTest extends PlaywrightManager {
                 .addCountUserList()
                 .checkNewUser();
     }
+
+    @Test
+    @DisplayName("Редактирование пользователя в таблице")
+    void editUser() {
+        new WebTablePage(page)
+                .open(WEB_TABLES.getPath());
+    }
 }

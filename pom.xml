@@ -28,6 +28,7 @@
         <browser>chrome</browser>
         <versionBrowser>130.0</versionBrowser>
         <url>https://demoqa.com</url>
+        <threads>2</threads>
 
     </properties>
 
@@ -87,6 +88,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
                 <configuration>
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <parallel>all</parallel>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <threadCountMethods>2</threadCountMethods>
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
@@ -98,6 +105,15 @@
                         <versionBrowser>${versionBrowser}</versionBrowser>
                         <url>${url}</url>
                     </systemPropertyVariables>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.execution.parallel.enabled=true
+                            junit.jupiter.execution.parallel.config.strategy=fixed
+                            junit.jupiter.execution.parallel.config.fixed.parallelism=${threads}
+                            junit.jupiter.execution.parallel.config.fixed.max-pool-size=${threads}
+                            junit.jupiter.execution.parallel.mode.default=concurrent
+                        </configurationParameters>
+                    </properties>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
