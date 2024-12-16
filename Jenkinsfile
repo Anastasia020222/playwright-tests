@@ -61,6 +61,7 @@ pipeline {
                 sh "touch ./allure-results/environment.properties"
                 sh "echo URL=$url > environment.properties"
                 sh "echo BROWSER=$browser >> environment.properties"
+                sh "ls ./allure-results"
                 sh "cat environment.properties"
                 sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
                 allure([
