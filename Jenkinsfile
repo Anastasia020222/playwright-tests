@@ -13,8 +13,7 @@ pipeline {
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
                         User email: ${env.BUILD_USER_EMAIL}
-                        Branch: ${params.branch}
-                    """
+                        Branch: ${params.branch}"""
                     }
                 }
             }
