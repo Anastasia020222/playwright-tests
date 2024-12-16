@@ -47,6 +47,7 @@ pipeline {
                 sh "touch environment.properties"
                 sh "echo URL=$url > environment.properties"
                 sh "echo BROWSER=$browser >> environment.properties"
+                sh "cat environment.properties"
             }
         }
     }
