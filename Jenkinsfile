@@ -9,14 +9,12 @@ pipeline {
     stages {
         stage('Display User') {
             steps {
-            def BRANCH = ${params.branch}
-            sh "$BRANCH"
                 script {
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
                         User: ${env.BUILD_USER}
                         User email: ${env.BUILD_USER_EMAIL}
-                        Branch: $branch
+                        Branch: ${branch}
                     """
                     }
                 }
