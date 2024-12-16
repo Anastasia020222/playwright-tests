@@ -9,12 +9,13 @@ pipeline {
     stages {
         stage('Display User') {
             steps {
+                sh "branch ${params.branch}"
                 script {
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
                         User: ${env.BUILD_USER}
                         User email: ${env.BUILD_USER_EMAIL}
-                        Branch : ${params.branch}
+                        Branch: ${params.branch}
                     """
                     }
                 }
@@ -25,7 +26,6 @@ pipeline {
                 sh "env"
                 checkout([$class: 'GitSCM',
                     branches: [[name: "*/${params.branch}"]],
-                    //userRemoteConfigs: [[url: 'https://github.com/your-repository.git']]
                 ])
             }
         }
