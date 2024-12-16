@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Display User') {
             steps {
-            BRANCH = ${params.branch}
+            def BRANCH = ${params.branch}
             sh "$BRANCH"
                 script {
                     wrap([$class: 'BuildUser']) {
