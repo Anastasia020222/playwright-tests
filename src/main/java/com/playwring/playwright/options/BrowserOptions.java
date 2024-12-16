@@ -6,6 +6,6 @@ public class BrowserOptions {
 
     public BrowserType.LaunchOptions getOptions() {
         return new BrowserType.LaunchOptions()
-                .setHeadless(false);
+                .setHeadless(true);
     }
 }
