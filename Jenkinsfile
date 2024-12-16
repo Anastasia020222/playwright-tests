@@ -3,6 +3,7 @@ pipeline {
     parameters {
         string(name: "url", defaultValue: "https://demoqa.com", trim: true, description: "Введите урл для запуска тестов")
         string(name: "browser", defaultValue: "chrome", trim: true, description: "Введите тип браузера")
+        string(name: "threads", defaultValue: "2", description: "Количество потоков")
     }
     stages {
         stage('Display User') {
@@ -34,7 +35,7 @@ pipeline {
                     -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
                     -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
                     -v ms-playwright:/ms-playwright \
-                    -e URL=$url -e BROWSER=$browser \
+                    -e URL=$url -e BROWSER=$browser -e THREADS=$threads \
                     playwright-tests
                 '''
             }
@@ -44,8 +45,7 @@ pipeline {
         always {
             script {
                 echo "Publication of the report"
-                sh("mkdir -p ./allure-results")
-                sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+                preparationReportAllure()
                 allure([
                     includeProperties: false,
                     jdk: '',
@@ -57,4 +57,11 @@ pipeline {
             sh("rm -rf /home/jenkins/allure-results/*")
         }
     }
+}
+
+def preparationReportAllure() {
+    sh("mkdir -p ./allure-results")
+    sh "echo URL=$url > ./allure-results/environment.properties"
+    sh "echo BROWSER=$browser >> ./allure-results/environment.properties"
+    sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
 }
