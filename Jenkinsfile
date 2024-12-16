@@ -10,7 +10,7 @@ pipeline {
         stage('Display User') {
             steps {
                 script {
-                   echo "Branch parameter: ${params.branch}"
+                   echo "Branch parameter: ${params.gitBranch}"
                    params.each { key, value ->
                            echo "${key}: ${value}"
                        }
