@@ -14,7 +14,7 @@ pipeline {
                     currentBuild.description = """
                         User: ${env.BUILD_USER}
                         User email: ${env.BUILD_USER_EMAIL}
-                        Branch: ${branch}
+                        Branch: ${params.branch}
                     """
                     }
                 }
