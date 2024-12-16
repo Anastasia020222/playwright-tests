@@ -113,9 +113,10 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
         return this;
     }
 
-    @Step("Проверяем, что у первого польователя в таблице изменились данные")
+    @Step("Проверяем, что у первого пользователя в таблице изменились данные")
     public WebTablePage checkUpdateDataUser(User generateNewUser) {
         String[] getInfoUser = listUser.first().innerText().split("\n");
+        allureAttachmentText("Actual user data", Arrays.toString(getInfoUser));
         Assertions.assertAll("Проверка изменения записей у пользователя в таблице", () -> {
             assertEquals(getInfoUser[0], generateNewUser.getFirstName(), "FirstName пользователя не соответствует firstname в таблице");
             assertEquals(getInfoUser[1], generateNewUser.getLastName(), "LastName пользователя не соответствует lastname в таблице");
