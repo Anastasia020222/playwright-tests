@@ -102,7 +102,7 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
         department.fill(generateNewUser.getDepartment());
 
         submit.click();
-
+        allureAttachmentText("Actual user data", generateUser.toString());
         allureAttachmentText("New user data", generateUser.toString());
 
         page.waitForCondition(() -> !modal.isVisible());
@@ -116,7 +116,6 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
     @Step("Проверяем, что у первого пользователя в таблице изменились данные")
     public WebTablePage checkUpdateDataUser(User generateNewUser) {
         String[] getInfoUser = listUser.first().innerText().split("\n");
-        allureAttachmentText("Actual user data", Arrays.toString(getInfoUser));
         Assertions.assertAll("Проверка изменения записей у пользователя в таблице", () -> {
             assertEquals(getInfoUser[0], generateNewUser.getFirstName(), "FirstName пользователя не соответствует firstname в таблице");
             assertEquals(getInfoUser[1], generateNewUser.getLastName(), "LastName пользователя не соответствует lastname в таблице");
