@@ -40,28 +40,13 @@ pipeline {
                 '''
             }
         }
-
-        stage("Create additional allure report artifacts") {
-            steps {
-                sh "pwd"
-                sh "touch environment.properties"
-                sh "echo URL=$url > environment.properties"
-                sh "echo BROWSER=$browser >> environment.properties"
-                sh "cat environment.properties"
-            }
-        }
     }
     post {
         always {
             script {
                 echo "Publication of the report"
                 sh("mkdir -p ./allure-results")
-                sh "pwd"
-                sh "ls"
-                sh "echo URL=$url > ./allure-results/environment.properties"
-                sh "echo BROWSER=$browser >> ./allure-results/environment.properties"
-                sh "ls ./allure-results"
-                sh "cat environment.properties"
+                environmentAllure()
                 sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
                 allure([
                     includeProperties: false,
@@ -74,4 +59,9 @@ pipeline {
             sh("rm -rf /home/jenkins/allure-results/*")
         }
     }
+}
+
+def environmentAllure() {
+    sh "echo URL=$url > ./allure-results/environment.properties"
+    sh "echo BROWSER=$browser >> ./allure-results/environment.properties"
 }
