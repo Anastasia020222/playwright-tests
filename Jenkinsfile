@@ -44,9 +44,8 @@ pipeline {
         stage("Create additional allure report artifacts") {
             steps {
             echo "URL: $url"
-                    echo "BROWSER: $browser"
-                sh "echo URL=$url > environment.properties"
-                sh "echo BROWSER=$browser >> environment.properties"
+                sh "echo URL=$url > ./.env"
+                sh "echo BROWSER=$browser >> ./.env"
             }
         }
     }
