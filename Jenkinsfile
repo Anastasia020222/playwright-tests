@@ -11,10 +11,9 @@ pipeline {
             steps {
                 script {
                     wrap([$class: 'BuildUser']) {
-                    currentBuild.description = """
-                        User email: ${env.BUILD_USER_EMAIL}
-                        Branch: ${params.branch}"""
-                    }
+                    currentBuild.description = "User: ${env.BUILD_USER ?: 'Unknown'}<br>" +
+                                               "User email: ${env.BUILD_USER_EMAIL ?: 'Unknown'}<br>" +
+                                               "Branch: ${params.branch ?: 'Not specified'}"
                 }
             }
         }
