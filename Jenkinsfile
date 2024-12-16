@@ -58,9 +58,8 @@ pipeline {
                 sh("mkdir -p ./allure-results")
                 sh "pwd"
                 sh "ls"
-                sh "touch /home/jenkins/allure-results/environment.properties"
-                sh "echo URL=$url > environment.properties"
-                sh "echo BROWSER=$browser >> environment.properties"
+                sh "echo URL=$url > ./allure-results/environment.properties"
+                sh "echo BROWSER=$browser >> ./allure-results/environment.properties"
                 sh "ls ./allure-results"
                 sh "cat environment.properties"
                 sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
