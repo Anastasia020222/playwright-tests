@@ -56,10 +56,11 @@ pipeline {
             script {
                 echo "Publication of the report"
                 sh("mkdir -p ./allure-results")
-//                 sh "pwd"
-//                 sh "mkdir environment.properties"
-//                 sh "echo URL=$url > environment.properties"
-//                 sh "echo BROWSER=$browser >> environment.properties"
+                sh "pwd"
+                sh "touch environment.properties"
+                sh "echo URL=$url > environment.properties"
+                sh "echo BROWSER=$browser >> environment.properties"
+                sh "cat environment.properties"
                 sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
                 allure([
                     includeProperties: false,
