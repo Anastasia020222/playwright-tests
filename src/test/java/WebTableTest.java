@@ -28,4 +28,12 @@ public class WebTableTest extends PlaywrightManager {
                 .clickEditDialogUser()
                 .editFieldsAge();
     }
+
+    @Test
+    @Tag("regression")
+    @DisplayName("Удаление первого пользователя в таблице")
+    void deleteUser() {
+        new WebTablePage(page)
+                .open(WEB_TABLES.getPath());
+    }
 }
