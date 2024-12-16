@@ -57,6 +57,7 @@ pipeline {
                 echo "Publication of the report"
                 sh("mkdir -p ./allure-results")
                 sh "pwd"
+                sh "ls"
                 sh "touch environment.properties"
                 sh "echo URL=$url > environment.properties"
                 sh "echo BROWSER=$browser >> environment.properties"
