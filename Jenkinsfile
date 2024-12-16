@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Display User') {
             steps {
-            sh "$branch"
+            sh "${env.BUILD_USER_EMAIL}"
                 script {
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
