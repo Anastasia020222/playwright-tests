@@ -45,9 +45,7 @@ pipeline {
         always {
             script {
                 echo "Publication of the report"
-                sh("mkdir -p ./allure-results")
-                environmentAllure()
-                sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
+                preparationReportAllure()
                 allure([
                     includeProperties: false,
                     jdk: '',
@@ -61,7 +59,9 @@ pipeline {
     }
 }
 
-def environmentAllure() {
+def preparationReportAllure() {
+    sh("mkdir -p ./allure-results")
     sh "echo URL=$url > ./allure-results/environment.properties"
     sh "echo BROWSER=$browser >> ./allure-results/environment.properties"
+    sh("cp -r /home/jenkins/allure-results/* ./allure-results/")
 }
