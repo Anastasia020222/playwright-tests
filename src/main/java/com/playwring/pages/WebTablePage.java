@@ -103,7 +103,7 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
 
         submit.click();
         allureAttachmentText("Actual user data", generateUser.toString());
-        allureAttachmentText("New user data", generateUser.toString());
+        allureAttachmentText("New user data", generateNewUser.toString());
 
         page.waitForCondition(() -> !modal.isVisible());
 
