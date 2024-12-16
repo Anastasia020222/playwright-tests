@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Display User') {
             steps {
-                sh "branch ${params.branch}"
                 script {
                     wrap([$class: 'BuildUser']) {
                     currentBuild.description = """
