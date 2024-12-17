@@ -1,17 +1,25 @@
+import com.microsoft.playwright.Page;
 import com.playwring.pages.WebTablePage;
+import com.playwring.playwright.Pages;
 import com.playwring.playwright.PlaywrightManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.playwring.utils.common.Path.WEB_TABLES;
 
-public class WebTableTest extends PlaywrightManager {
+@ExtendWith(PlaywrightManager.class)
+public class WebTableTest {
+
+    @Pages
+    private Page page;
 
     @Test
-    @Tag("regression")
+    @Tags(value = {@Tag("regression"), @Tag("web")})
     @DisplayName("Добавление пользователя в таблицу")
-    void addUser() {
+    void addUserTableTest() {
         new WebTablePage(page)
                 .open(WEB_TABLES.getPath())
                 .openDialogAddUser()
@@ -20,9 +28,9 @@ public class WebTableTest extends PlaywrightManager {
     }
 
     @Test
-    @Tag("regression")
+    @Tags(value = {@Tag("regression"), @Tag("web")})
     @DisplayName("Редактирование первого пользователя в таблице")
-    void editUser() {
+    void editUserTableTest() {
         new WebTablePage(page)
                 .open(WEB_TABLES.getPath())
                 .clickEditDialogUser()

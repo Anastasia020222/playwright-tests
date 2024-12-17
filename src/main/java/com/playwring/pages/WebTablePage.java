@@ -21,17 +21,17 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
 
     private final User generateUser = new GenerateUser().generateUser();
 
-    Locator buttonAdd = page.locator("id=addNewRecordButton");
-    Locator modal = page.locator("div[role='dialog']");
-    Locator firstName = page.locator("id=firstName");
-    Locator lastName = page.locator("id=lastName");
-    Locator email = page.locator("id=userEmail");
-    Locator age = page.locator("id=age");
-    Locator salary = page.locator("id=salary");
-    Locator department = page.locator("id=department");
-    Locator submit = page.locator("id=submit");
-    Locator listUser = page.locator("div[role='rowgroup']");
-    Locator iconEdit = page.locator("id=edit-record-1");
+    private final Locator buttonAdd = page.locator("id=addNewRecordButton");
+    private final Locator modal = page.locator("div[role='dialog']");
+    private final Locator firstName = page.locator("id=firstName");
+    private final Locator lastName = page.locator("id=lastName");
+    private final Locator email = page.locator("id=userEmail");
+    private final Locator age = page.locator("id=age");
+    private final Locator salary = page.locator("id=salary");
+    private final Locator department = page.locator("id=department");
+    private final Locator submit = page.locator("id=submit");
+    private final Locator listUser = page.locator("div[role='rowgroup']");
+    private final Locator iconEdit = page.locator("id=edit-record-1");
 
     @Step("Открытие диалогового окна регистрации пользователя")
     public WebTablePage openDialogAddUser() {
