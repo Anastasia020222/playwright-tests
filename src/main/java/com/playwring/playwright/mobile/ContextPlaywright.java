@@ -7,6 +7,9 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 public class ContextPlaywright {
 
     public BrowserContext getBrowserContext(Browser browser, ExtensionContext extensionContext) {
+        if (browser == null) {
+            throw new IllegalStateException("Browser is not initialized.");
+        }
         Mobile mobile = extensionContext.getRequiredTestMethod().getAnnotation(Mobile.class);
         if (mobile != null) {
             Browser.NewContextOptions newContextOptions = new Browser.NewContextOptions()

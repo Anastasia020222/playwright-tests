@@ -2,10 +2,7 @@ import com.microsoft.playwright.Page;
 import com.playwring.pages.WebTablePage;
 import com.playwring.playwright.Pages;
 import com.playwring.playwright.PlaywrightManager;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.playwring.utils.common.Path.WEB_TABLES;
