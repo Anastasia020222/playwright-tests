@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Path {
 
-    WEB_TABLES("/webtables");
+    WEB_TABLES("/webtables"),
+    BOOKS("/books");
 
     private final String path;
 

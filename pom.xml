@@ -88,12 +88,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
                 <configuration>
-                    <forkCount>2</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <parallel>all</parallel>
-                    <perCoreThreadCount>false</perCoreThreadCount>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <threadCountMethods>2</threadCountMethods>
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
@@ -110,8 +104,8 @@
                             junit.jupiter.execution.parallel.enabled=true
                             junit.jupiter.execution.parallel.config.strategy=fixed
                             junit.jupiter.execution.parallel.config.fixed.parallelism=${threads}
-                            junit.jupiter.execution.parallel.config.fixed.max-pool-size=${threads}
-                            junit.jupiter.execution.parallel.mode.default=concurrent
+                            junit.jupiter.execution.parallel.mode.default=same_thread
+                            junit.jupiter.execution.parallel.mode.classes.default=concurrent
                         </configurationParameters>
                     </properties>
                     <argLine>
