@@ -32,9 +32,9 @@ pipeline {
         }
         stage("Running Playwright tests") {
             steps {
-                sh 'ls -a'
-                sh 'ls -ld'
-                sh 'ls -la'
+                sh "ls -a"
+                sh "ls -ld"
+                sh "ls -la"
                 sh '''
                     docker run --rm \
                     -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
