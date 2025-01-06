@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.playwring</groupId>
-    <artifactId>playwring-web-tests</artifactId>
+    <artifactId>playwring-tests</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -78,6 +78,21 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>2.0.13</version>
         </dependency>
     </dependencies>
 

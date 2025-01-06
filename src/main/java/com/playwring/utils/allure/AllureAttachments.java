@@ -8,4 +8,9 @@ public class AllureAttachments {
     public static String allureAttachmentText(String name, String text) {
         return text;
     }
+
+    @Attachment(value = "{name}", type = "application/json", fileExtension = ".json")
+    public static String allureAttachmentJson(String name, String jsonContent) {
+        return jsonContent;
+    }
 }
