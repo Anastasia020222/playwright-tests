@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                    -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
+                    -v m2:/home/jenkins/.m2 \
                     -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
                     -v ms-playwright:/ms-playwright \
                     -e URL=$url -e BROWSER=$browser -e THREADS=$threads \
