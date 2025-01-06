@@ -35,6 +35,7 @@ pipeline {
                 sh 'ls -a'
                 sh 'ls -ld'
                 sh 'ls -la'
+                sh 'ls /home/jenkins/.m2/repository'
                 sh '''
                     docker run --rm \
                     -v m2:/home/jenkins/.m2/repository \
