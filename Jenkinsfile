@@ -37,6 +37,7 @@ pipeline {
                 sh 'ls -la'
                 sh '''
                     docker run --rm \
+                    -v /home/unixuser/.m2/repository:/home/jenkins/.m2/repository \
                     -v web-allure:/home/jenkins/workspace/web-tests/allure-results \
                     -v ms-playwright:/ms-playwright \
                     -e URL=$url -e BROWSER=$browser -e THREADS=$threads \
