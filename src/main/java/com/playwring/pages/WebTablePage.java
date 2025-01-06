@@ -2,7 +2,6 @@ package com.playwring.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.playwring.user.GenerateUser;
 import com.playwring.user.User;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
@@ -18,8 +17,6 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
     public WebTablePage(Page page) {
         super(page);
     }
-
-    private final User generateUser = new GenerateUser().generateUser();
 
     private final Locator buttonAdd = page.locator("id=addNewRecordButton");
     private final Locator modal = page.locator("div[role='dialog']");
@@ -44,17 +41,17 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
     }
 
     @Step("Добавление пользователя в таблицу")
-    public WebTablePage addCountUserList() {
+    public WebTablePage addCountUserList(User user) {
         int startCount = getCountUser();
 
-        firstName.fill(generateUser.getFirstName());
-        lastName.fill(generateUser.getLastName());
-        email.fill(generateUser.getEmail());
-        age.fill(generateUser.getAge());
-        salary.fill(generateUser.getSalary());
-        department.fill(generateUser.getDepartment());
+        firstName.fill(user.getFirstName());
+        lastName.fill(user.getLastName());
+        email.fill(user.getEmail());
+        age.fill(user.getAge());
+        salary.fill(user.getSalary());
+        department.fill(user.getDepartment());
         submit.click();
-        allureAttachmentText("User data", generateUser.toString());
+        allureAttachmentText("User data", user.toString());
 
         page.waitForCondition(() -> !modal.isVisible());
 
@@ -66,17 +63,17 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
     }
 
     @Step("Проверка информации добавленного пользователя")
-    public WebTablePage checkNewUser() {
+    public WebTablePage checkNewUser(User user) {
         int numberUser = getCountUser();
         String[] t = listUser.nth(numberUser - 1).innerText().split("\n");
         allureAttachmentText("Actual user data", Arrays.toString(t));
         Assertions.assertAll("Проверка записи пользователя в таблице", () -> {
-            assertEquals(t[0], generateUser.getFirstName(), "FirstName пользователя не соответствует firstname в таблице");
-            assertEquals(t[1], generateUser.getLastName(), "LastName пользователя не соответствует lastname в таблице");
-            assertEquals(t[2], generateUser.getAge(), "Заданное age не соответствует age в таблице");
-            assertEquals(t[3], generateUser.getEmail(), "Заданный email не соответствует записи в таблице");
-            assertEquals(t[4], generateUser.getSalary(), "Заданный salary не соответствует записи в таблице");
-            assertEquals(t[5], generateUser.getDepartment(), "Заданный department не соответствует записи в таблице");
+            assertEquals(t[0], user.getFirstName(), "FirstName пользователя не соответствует firstname в таблице");
+            assertEquals(t[1], user.getLastName(), "LastName пользователя не соответствует lastname в таблице");
+            assertEquals(t[2], user.getAge(), "Заданное age не соответствует age в таблице");
+            assertEquals(t[3], user.getEmail(), "Заданный email не соответствует записи в таблице");
+            assertEquals(t[4], user.getSalary(), "Заданный salary не соответствует записи в таблице");
+            assertEquals(t[5], user.getDepartment(), "Заданный department не соответствует записи в таблице");
         });
         return this;
     }
@@ -92,24 +89,22 @@ public class WebTablePage extends AbsBasePage<WebTablePage> {
     }
 
     @Step("Введение новых данных")
-    public WebTablePage editFieldsAge() {
-        User generateNewUser = new GenerateUser().generateUser();
-        firstName.fill(generateNewUser.getFirstName());
-        lastName.fill(generateNewUser.getLastName());
-        email.fill(generateNewUser.getEmail());
-        age.fill(generateNewUser.getAge());
-        salary.fill(generateNewUser.getSalary());
-        department.fill(generateNewUser.getDepartment());
-
+    public WebTablePage editFieldsAge(User user) {
+        firstName.fill(user.getFirstName());
+        lastName.fill(user.getLastName());
+        email.fill(user.getEmail());
+        age.fill(user.getAge());
+        salary.fill(user.getSalary());
+        department.fill(user.getDepartment());
         submit.click();
-        allureAttachmentText("Actual user data", generateUser.toString());
-        allureAttachmentText("New user data", generateNewUser.toString());
+
+        allureAttachmentText("New user data", user.toString());
 
         page.waitForCondition(() -> !modal.isVisible());
 
         assertFalse(modal.isVisible(), "Диалоговое окно не закрылось");
 
-        checkUpdateDataUser(generateNewUser);
+        checkUpdateDataUser(user);
         return this;
     }
 
