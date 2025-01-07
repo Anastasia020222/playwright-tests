@@ -1,6 +1,5 @@
 import com.microsoft.playwright.APIRequestContext;
 import com.playwring.playwright.PlaywrightManager;
-import com.playwring.user.CreateUser;
 import com.playwring.user.User;
 import com.playwring.utils.api.services.ApiContext;
 import com.playwring.utils.api.steps.ApiBooks;
@@ -16,9 +15,6 @@ public class ApiBookTest {
     @ApiContext
     private APIRequestContext apiRequestContext;
 
-    @CreateUser
-    private User user;
-
     @Test
     @Tags(value = {@Tag("regression"), @Tag("api")})
     @DisplayName("Получение списка книг из таблицы")
@@ -30,7 +26,7 @@ public class ApiBookTest {
     @Test
     @Tags(value = {@Tag("regression"), @Tag("api")})
     @DisplayName("Добавление книги пользователю")
-    void addListOfBooksUser() {
+    void addListOfBooksUser(User user) {
         new ApiBooks(apiRequestContext)
                 .addBooks(user)
                 .checkAddingBook(user);
