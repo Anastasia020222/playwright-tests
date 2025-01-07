@@ -30,8 +30,9 @@ public class CreateUserContext {
         this.apiRequestContext = apiRequestContext;
     }
 
-    public User generateUser() {
-        this.user = new User().generateUser();
+    public User generateNewUser() {
+        this.user = new User();
+        this.user.fillInFields();
         log.info("Generate user: {}", user);
         return user;
     }

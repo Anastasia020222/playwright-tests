@@ -2,7 +2,6 @@ package com.playwring.playwright;
 
 import com.microsoft.playwright.*;
 import com.playwring.playwright.mobile.ContextPlaywright;
-import com.playwring.user.CreateUser;
 import com.playwring.user.User;
 import com.playwring.user.CreateUserContext;
 import com.playwring.utils.api.services.ApiContext;
@@ -13,7 +12,7 @@ import java.lang.reflect.Field;
 import java.util.function.Consumer;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback, BeforeAllCallback, AfterAllCallback {
+public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback, BeforeAllCallback, AfterAllCallback, ParameterResolver {
 
     private Page page;
     private BrowserContext context;
@@ -27,6 +26,7 @@ public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback,
         PlaywrightFactory factory = new PlaywrightFactory();
         playwright = Playwright.create();
         browser = factory.create(playwright);
+        userContext = new CreateUserContext();
     }
 
     @Override
@@ -62,11 +62,9 @@ public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback,
             try {
                 if (field.isAnnotationPresent(Pages.class) && field.getType().equals(Page.class)) {
                     field.set(testInstance, page);
-                } else if (field.isAnnotationPresent(CreateUser.class) && field.getType().equals(User.class)) {
-                    initializeUserContextIfNeeded();
-                    field.set(testInstance, userContext.getUser());
-                } else if (field.isAnnotationPresent(ApiContext.class) && field.getType().equals(APIRequestContext.class)) {
-                    initializeApiContextIfNeeded();
+                }
+                if (field.isAnnotationPresent(ApiContext.class) && field.getType().equals(APIRequestContext.class)) {
+                    apiRequestContext = playwright.request().newContext();
                     field.set(testInstance, apiRequestContext);
                 }
             } catch (IllegalAccessException e) {
@@ -76,29 +74,17 @@ public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback,
     }
 
     private void initializeUserContextIfNeeded() {
-        if (userContext == null || userContext.getUser() == null || userContext.getUser().getFirstName() == null) {
-            userContext = new CreateUserContext();
-            userContext.generateUser();
-        }
+        userContext.generateNewUser();
     }
 
     private void initializeApiContextIfNeeded() {
-        if (apiRequestContext == null || userContext == null) {
-            createContextUser();
-        }
-        if (userContext.getUser() == null) {
-            userContext.generateUser();
-        }
+        userContext = new CreateUserContext(apiRequestContext);
+        userContext.generateNewUser();
         userContext.createUser();
         apiRequestContext = playwright.request().newContext(new APIRequest.NewContextOptions()
                 .setBaseURL("https://demoqa.com")
                 .setExtraHTTPHeaders(userContext.getHeaders()));
         userContext.setApiRequestContext(apiRequestContext);
-    }
-
-    private void createContextUser() {
-        apiRequestContext = playwright.request().newContext();
-        userContext = new CreateUserContext(apiRequestContext);
     }
 
     private <T> void safelyClose(T resource, Consumer<T> closeMethod) {
@@ -109,6 +95,31 @@ public class PlaywrightManager implements BeforeEachCallback, AfterEachCallback,
                 System.err.println("Failed to close resource: " + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return parameterContext.getParameter().getType() == User.class;
+    }
+
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        Object testInstance = extensionContext.getRequiredTestInstance();
+
+        for (Field field : testInstance.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                if (field.isAnnotationPresent(ApiContext.class) && field.getType().equals(APIRequestContext.class)) {
+                    initializeApiContextIfNeeded();
+                    field.set(testInstance, apiRequestContext);
+                } else {
+                    initializeUserContextIfNeeded();
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Failed to inject dependencies into the test instance", e);
+            }
+        }
+        return userContext.getUser();
     }
 }
 
